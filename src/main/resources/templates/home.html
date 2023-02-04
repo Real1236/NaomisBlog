@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Naomi's Blog</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>Naomi's Blog</h1>
+    <div sec:authorize="isAuthenticated()">
+        <a class="btn" th:href="@{/blog/blogPost}">Create New Blog</a>
+        <a class="btn" th:href="@{/logout}">Log Out</a>
+    </div>
+    <div sec:authorize="isAnonymous()">
+        <a class="btn" th:href="@{/login}">Login</a>
+    </div>
+
+    <div class="blog-post" th:each="blogPost : ${blogPosts}">
+        <hr>
+        <h2 th:text="${blogPost.title}"></h2>
+
+        <div sec:authorize="isAuthenticated()">
+            <form action="#" th:action="@{/blog/blogPost/{id}(id=${blogPost.id})}" th:method="get">
+                <input type="submit" class="btn" value="Edit"/>
+            </form>
+
+            <form action="#" th:action="@{/blog/blogPost/{id}(id=${blogPost.id})}" th:method="delete">
+                <input type="submit" class="btn" value="Delete"/>
+            </form>
+        </div>
+
+        <h3 th:text="${blogPost.date}"></h3>
+        <p th:text="${blogPost.blog}"></p>
+    </div>
+
+</body>
+</html>
