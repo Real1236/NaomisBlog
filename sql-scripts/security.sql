@@ -1,4 +1,8 @@
-use `blog`;
+DROP SCHEMA IF EXISTS `security`;
+
+CREATE SCHEMA `security`;
+
+use `security`;
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
