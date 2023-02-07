@@ -19,15 +19,20 @@ public class BlogPost {
     @Column(name = "date")
     private Date date;
 
+    @Lob
+    @Column(name = "image")
+    private byte[] image;
+
     @Column(name = "blog")
     private String blog;
 
     public BlogPost() {
     }
 
-    public BlogPost(String title, Date date, String blog) {
+    public BlogPost(String title, Date date, byte[] image, String blog) {
         this.title = title;
         this.date = date;
+        this.image = image;
         this.blog = blog;
     }
 
@@ -53,6 +58,14 @@ public class BlogPost {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public String getBlog() {
