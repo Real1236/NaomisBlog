@@ -30,7 +30,7 @@
         </div>
 
         <h3 th:text="${blogPost.date}"></h3>
-        <img th:src="@{/blog/images/{id}(id=${blogPost.id})}" alt="Image">
+        <img th:if="${blogPost.image != null}" th:src="@{/image/{id}(id=${blogPost.id})}" alt="Image" src="#">
         <p th:text="${blogPost.blog}"></p>
     </div>
 

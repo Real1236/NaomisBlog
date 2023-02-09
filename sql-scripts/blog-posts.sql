@@ -18,6 +18,6 @@ CREATE TABLE `blog-posts` (
 
 INSERT INTO `blog-posts` (`title`, `date`, `image`, `blog`) VALUES 
 ('How to Play Chess', '2023-01-01', LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ChessSet.jpg'), 'Queen go br'),
-('How to Play Basketball', '2023-01-01', LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/3fede448645bf312358edfd308850570.jpg'), 'Basketball go boing')
--- ('Why does hospital toast taste so good', '2023-01-01', 'Toast goes yum'),
--- ('How to Play Violin', '2023-01-01', 'Violin go eek')
+('How to Play Basketball', '2023-01-01', LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/3fede448645bf312358edfd308850570.jpg'), 'Basketball go boing'),
+('How to Play Violin', '2023-01-01', LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/product_main_1_V33161.jpg'), 'Violin go eek'),
+('Why does hospital toast taste so good', '2023-01-01', LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/71p2DKB4XiL._CR0,204,1224,1224_UX256.jpg'), 'Toast goes yum')

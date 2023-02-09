@@ -3,6 +3,7 @@ package com.arthur.blog.entity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 @Entity
 @Table(name = "blog-posts")
@@ -78,11 +79,23 @@ public class BlogPost {
 
     @Override
     public String toString() {
-        return "BlogPost{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", date=" + date +
-                ", blog='" + blog + '\'' +
-                '}';
+        String res;
+        if (image == null) {
+            res = "BlogPost{" +
+                    "id=" + id +
+                    ", title='" + title + '\'' +
+                    ", date=" + date +
+                    ", blog='" + blog + '\'' +
+                    '}';
+        } else {
+            res = "BlogPost{" +
+                    "id=" + id +
+                    ", title='" + title + '\'' +
+                    ", date=" + date +
+                    ", image=" + Arrays.toString(Arrays.copyOfRange(image, 0, 5)) +
+                    ", blog='" + blog + '\'' +
+                    '}';
+        }
+        return res;
     }
 }

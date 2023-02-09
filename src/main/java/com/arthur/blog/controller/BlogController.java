@@ -3,10 +3,6 @@ package com.arthur.blog.controller;
 import com.arthur.blog.entity.BlogPost;
 import com.arthur.blog.service.BlogPostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -59,10 +55,10 @@ public class BlogController {
         if (blogPost.orElse(null) == null) {
             blogPostService.save(new BlogPost(title, date, image.getBytes(), blog));
         } else {
-            blogPost.orElse(null).setTitle(title);
-            blogPost.orElse(null).setDate(date);
-            blogPost.orElse(null).setImage(image.getBytes());
-            blogPost.orElse(null).setBlog(blog);
+            blogPost.get().setTitle(title);
+            blogPost.get().setDate(date);
+            blogPost.get().setImage(image.getBytes());
+            blogPost.get().setBlog(blog);
             blogPostService.save(blogPost.get());
         }
         return "redirect:/blog/home";
@@ -73,16 +69,5 @@ public class BlogController {
         blogPostService.deleteById(id);
         return "redirect:/blog/home";
     }
-
-    @GetMapping("/images/{id}")
-    public ResponseEntity<byte[]> getImage(@PathVariable int id) {
-        Optional<BlogPost> blogPost = blogPostService.findById(id);
-        assert blogPost.orElse(null) != null;
-        byte[] image = blogPost.orElse(null).getImage();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        return new ResponseEntity<>(image, headers, HttpStatus.OK);
-    }
-
 
 }
