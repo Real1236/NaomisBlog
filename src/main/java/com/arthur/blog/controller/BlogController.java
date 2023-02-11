@@ -49,8 +49,7 @@ public class BlogController {
                                @RequestParam("imageFile") MultipartFile image) throws IOException {
         if (image == null || image.isEmpty()) {
             Optional<BlogPost> originalBlogPost = blogPostService.findById(blogPost.getId());
-            assert originalBlogPost.orElse(null) != null;
-            blogPost.setImage(originalBlogPost.get().getImage());
+            originalBlogPost.ifPresent(post -> blogPost.setImage(post.getImage()));
         } else {
             blogPost.setImage(image.getBytes());
         }
