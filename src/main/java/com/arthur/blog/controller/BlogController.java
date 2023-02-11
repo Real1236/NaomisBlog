@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.Optional;
 
 @Controller
@@ -46,21 +45,16 @@ public class BlogController {
     }
 
     @PostMapping("/blogPost")
-    public String saveBlogPost(@RequestParam("id") int id,
-                               @RequestParam("title") String title,
-                               @RequestParam("date") Date date,
-                               @RequestParam("image") MultipartFile image,
-                               @RequestParam("blog") String blog) throws IOException {
-        Optional<BlogPost> blogPost = blogPostService.findById(id);
-        if (blogPost.orElse(null) == null) {
-            blogPostService.save(new BlogPost(title, date, image.getBytes(), blog));
+    public String saveBlogPost(@ModelAttribute("newBlogPost") BlogPost blogPost,
+                               @RequestParam("imageFile") MultipartFile image) throws IOException {
+        if (image == null || image.isEmpty()) {
+            Optional<BlogPost> originalBlogPost = blogPostService.findById(blogPost.getId());
+            assert originalBlogPost.orElse(null) != null;
+            blogPost.setImage(originalBlogPost.get().getImage());
         } else {
-            blogPost.get().setTitle(title);
-            blogPost.get().setDate(date);
-            blogPost.get().setImage(image.getBytes());
-            blogPost.get().setBlog(blog);
-            blogPostService.save(blogPost.get());
+            blogPost.setImage(image.getBytes());
         }
+        blogPostService.save(blogPost);
         return "redirect:/blog/home";
     }
 

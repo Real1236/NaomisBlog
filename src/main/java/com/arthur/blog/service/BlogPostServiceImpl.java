@@ -19,7 +19,7 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     @Override
     public BlogPost save(BlogPost blogPost) {
-        if (blogPost.getImage().length == 0)
+        if (blogPost.getImage() == null || blogPost.getImage().length == 0)
             return this.deleteImage(blogPost);
         return blogPostRepository.save(blogPost);
     }

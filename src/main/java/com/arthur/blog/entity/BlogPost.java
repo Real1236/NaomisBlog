@@ -30,13 +30,6 @@ public class BlogPost {
     public BlogPost() {
     }
 
-    public BlogPost(String title, Date date, byte[] image, String blog) {
-        this.title = title;
-        this.date = date;
-        this.image = image;
-        this.blog = blog;
-    }
-
     public int getId() {
         return id;
     }
