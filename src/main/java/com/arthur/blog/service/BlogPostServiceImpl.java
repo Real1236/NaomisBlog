@@ -41,7 +41,7 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     @Override
     public Iterable<BlogPost> findAll() {
-        return blogPostRepository.findAll();
+        return blogPostRepository.findAllByOrderByDateDesc();
     }
 
     @Override
