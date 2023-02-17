@@ -28,4 +28,6 @@ public interface BlogPostService {
     void deleteAll(Iterable<? extends BlogPost> entities);
 
     void deleteAll();
+
+    BlogPost deleteImage(BlogPost blogPost);
 }

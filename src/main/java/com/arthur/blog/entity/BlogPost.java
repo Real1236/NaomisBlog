@@ -3,6 +3,7 @@ package com.arthur.blog.entity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 @Entity
 @Table(name = "blog-posts")
@@ -19,16 +20,14 @@ public class BlogPost {
     @Column(name = "date")
     private Date date;
 
+    @Lob
+    @Column(name = "image")
+    private byte[] image;
+
     @Column(name = "blog")
     private String blog;
 
     public BlogPost() {
-    }
-
-    public BlogPost(String title, Date date, String blog) {
-        this.title = title;
-        this.date = date;
-        this.blog = blog;
     }
 
     public int getId() {
@@ -55,6 +54,14 @@ public class BlogPost {
         this.date = date;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
     public String getBlog() {
         return blog;
     }
@@ -65,11 +72,23 @@ public class BlogPost {
 
     @Override
     public String toString() {
-        return "BlogPost{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", date=" + date +
-                ", blog='" + blog + '\'' +
-                '}';
+        String res;
+        if (image == null) {
+            res = "BlogPost{" +
+                    "id=" + id +
+                    ", title='" + title + '\'' +
+                    ", date=" + date +
+                    ", blog='" + blog + '\'' +
+                    '}';
+        } else {
+            res = "BlogPost{" +
+                    "id=" + id +
+                    ", title='" + title + '\'' +
+                    ", date=" + date +
+                    ", image=" + Arrays.toString(Arrays.copyOfRange(image, 0, 5)) +
+                    ", blog='" + blog + '\'' +
+                    '}';
+        }
+        return res;
     }
 }

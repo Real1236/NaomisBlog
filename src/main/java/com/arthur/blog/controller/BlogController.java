@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Controller
@@ -43,7 +45,14 @@ public class BlogController {
     }
 
     @PostMapping("/blogPost")
-    public String saveBlogPost(@ModelAttribute("newBlogPost") BlogPost blogPost) {
+    public String saveBlogPost(@ModelAttribute("newBlogPost") BlogPost blogPost,
+                               @RequestParam("imageFile") MultipartFile image) throws IOException {
+        if (image == null || image.isEmpty()) {
+            Optional<BlogPost> originalBlogPost = blogPostService.findById(blogPost.getId());
+            originalBlogPost.ifPresent(post -> blogPost.setImage(post.getImage()));
+        } else {
+            blogPost.setImage(image.getBytes());
+        }
         blogPostService.save(blogPost);
         return "redirect:/blog/home";
     }
@@ -53,4 +62,5 @@ public class BlogController {
         blogPostService.deleteById(id);
         return "redirect:/blog/home";
     }
+
 }

@@ -5,28 +5,43 @@
     <title>Create New Blog</title>
 </head>
 <body>
-    <h1>Create New Blog</h1>
+<h1>Create New Blog</h1>
 
-    <form action="#" th:action="@{/blog/blogPost}" th:object="${newBlogPost}" th:method="post">
-        <!-- Add hidden form field to handle update -->
-        <input type="hidden" th:field="*{id}"/>
-        <label>
-            <input type="text" th:field="*{title}" th:placeholder="Title" th:required="required">
-        </label>
-        <br>
-        <br>
-        <label>
-            <input type="date" th:field="*{date}" th:placeholder="Date" th:required="required">
-        </label>
-        <br>
-        <br>
-        <label>
-            <input type="text" th:field="*{blog}" th:placeholder="Blog" th:required="required" style="width: 150px;">
-        </label>
-        <br>
-        <br>
-        <input type="submit" value="Publish"/>
-    </form>
+<form action="#" th:action="@{/blog/blogPost}" th:object="${newBlogPost}" th:method="post" enctype="multipart/form-data">
+    <!-- Add hidden form field to handle update -->
+    <input type="hidden" th:field="*{id}"/>
+    <label>
+        <input type="text" th:field="*{title}" th:placeholder="Title" th:required="required">
+    </label>
+    <br>
+    <br>
+    <label>
+        <input type="date" th:field="*{date}" th:placeholder="Date" th:required="required">
+    </label>
+    <br>
+    <br>
+    <label>
+        <input type="hidden" th:field="*{image}">
+        <div th:if="${newBlogPost.image != null}">
+            <img th:src="@{/image/{id}(id=${newBlogPost.id})}" alt="Image" src="#">
+            <input type="button" value="Delete Image" onclick="document.getElementById('delete-form').submit();" />
+            <input type="file" th:name="imageFile" style="display: none;">
+        </div>
+        <div th:if="${newBlogPost.image == null}">
+            <input type="file" th:name="imageFile">
+        </div>
+    </label>
+    <br>
+    <br>
+    <label>
+        <input type="text" th:field="*{blog}" th:placeholder="Blog" th:required="required" style="width: 150px;">
+    </label>
+    <br>
+    <br>
+    <input type="submit" value="Publish"/>
+</form>
 
+<form action="#" th:action="@{/image/{id}(id=${newBlogPost.id})}" th:method="delete" style="display: none;" id="delete-form">
+</form>
 </body>
 </html>

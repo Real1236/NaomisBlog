@@ -19,6 +19,8 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     @Override
     public BlogPost save(BlogPost blogPost) {
+        if (blogPost.getImage() == null || blogPost.getImage().length == 0)
+            return this.deleteImage(blogPost);
         return blogPostRepository.save(blogPost);
     }
 
@@ -75,5 +77,11 @@ public class BlogPostServiceImpl implements BlogPostService {
     @Override
     public void deleteAll() {
         blogPostRepository.deleteAll();
+    }
+
+    @Override
+    public BlogPost deleteImage(BlogPost blogPost) {
+        blogPost.setImage(null);
+        return blogPostRepository.save(blogPost);
     }
 }
