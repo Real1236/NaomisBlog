@@ -39,11 +39,8 @@
                             <h2 th:text="${blogPost.title}"></h2>
                             <h3 th:text="${blogPost.date}"></h3>
                         </header>
-<!--                        <span class="image right">-->
-<!--                            <img th:if="${blogPost.image != null}" th:src="@{/image/{id}(id=${blogPost.id})}" alt="Image" src="#">-->
-<!--                        </span>-->
                         <img class="image right" th:if="${blogPost.image != null}" th:src="@{/image/{id}(id=${blogPost.id})}" alt="Image" src="#">
-                        <p th:text="${blogPost.blog}"></p>
+                        <p th:text="${blogPost.blog}" style="white-space: pre-wrap;"></p>
 
                         <div sec:authorize="isAuthenticated()">
                             <ul class="actions">
