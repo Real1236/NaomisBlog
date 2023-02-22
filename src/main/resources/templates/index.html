@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Hello World</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <p>"Hello World"</p>
-    <a class="btn" th:href="@{/blog/home}">Go to Blog</a>
+    <h1>"Hello World"</h1>
+    <a class="button" th:href="@{/blog/home}">Go to Blog</a>
 </body>
 </html>
