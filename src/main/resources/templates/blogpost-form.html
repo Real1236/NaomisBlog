@@ -42,12 +42,19 @@
                         <div class="col-12">
                             <input type="hidden" th:field="*{image}">
                             <div th:if="${newBlogPost.image != null}">
-                                <img th:src="@{/image/{id}(id=${newBlogPost.id})}" alt="Image" src="#">
-                                <input type="submit" value="Delete Image" class="primary" onclick="document.getElementById('delete-form').submit();" />
+                                <img class="image left" th:src="@{/image/{id}(id=${newBlogPost.id})}" alt="Image" src="#">
+                                <input type="button" value="Delete Image" class="primary" onclick="document.getElementById('delete-form').submit();" />
                                 <input type="file" th:name="imageFile" style="display: none;">
                             </div>
                             <div th:if="${newBlogPost.image == null}">
-                                <input type="file"  class="button primary icon solid fa-search" th:name="imageFile">
+                                <label class="button primary">
+                                    <input type="file" id="file-input" th:name="imageFile">
+                                    Choose File
+                                </label>
+                                <span>
+                                    <strong>Chosen file:</strong>
+                                    <span id="file-name">None</span>
+                                </span>
                             </div>
                         </div>
                         <div class="col-12">
@@ -64,5 +71,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        let inputFile = document.getElementById('file-input');
+        let fileNameField = document.getElementById('file-name');
+        inputFile.addEventListener('change', function (event) {
+            let uploadedFileName = event.target.files[0].name;
+            fileNameField.textContent = uploadedFileName;
+        });
+    </script>
+
 </body>
 </html>
