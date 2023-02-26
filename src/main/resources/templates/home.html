@@ -1,37 +1,67 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Naomi's Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+
 <body>
-    <h1>Naomi's Blog</h1>
-    <div sec:authorize="isAuthenticated()">
-        <a class="btn" th:href="@{/blog/blogPost}">Create New Blog</a>
-        <a class="btn" th:href="@{/logout}">Log Out</a>
-    </div>
-    <div sec:authorize="isAnonymous()">
-        <a class="btn" th:href="@{/login}">Login</a>
-    </div>
 
-    <div class="blog-post" th:each="blogPost : ${blogPosts}">
-        <hr>
-        <h2 th:text="${blogPost.title}"></h2>
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-        <div sec:authorize="isAuthenticated()">
-            <form action="#" th:action="@{/blog/blogPost/{id}(id=${blogPost.id})}" th:method="get">
-                <input type="submit" class="btn" value="Edit"/>
-            </form>
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
 
-            <form action="#" th:action="@{/blog/blogPost/{id}(id=${blogPost.id})}" th:method="delete">
-                <input type="submit" class="btn" value="Delete"/>
-            </form>
+                <!-- Header -->
+                <header id="header">
+                    <a href="index.html" class="logo"><strong>Naomi's Blog</strong> by Naomi Tse</a>
+                    <ul class="icons">
+                        <div sec:authorize="isAnonymous()">
+                            <li><a th:href="@{/login}" class="button primary">Login</a></li>
+                        </div>
+                        <div sec:authorize="isAuthenticated()">
+                            <li><a th:href="@{/blog/blogPost}" class="button primary">Create New Blog</a></li>
+                            <li><a th:href="@{/logout}" class="button">Log Out</a></li>
+                        </div>
+                    </ul>
+                </header>
+
+                <!-- Content -->
+                <div th:each="blogPost : ${blogPosts}">
+                    <section>
+                        <header>
+                            <h2 th:text="${blogPost.title}"></h2>
+                            <h3 th:text="${blogPost.date}"></h3>
+                        </header>
+                        <div class="row">
+                            <div class="col-12">
+                                <img class="image right" th:if="${blogPost.image != null}" th:src="@{/image/{id}(id=${blogPost.id})}" alt="Image" src="#">
+                                <p th:text="${blogPost.blog}" style="white-space: pre-wrap;"></p>
+                            </div>
+                        </div>
+
+                        <div sec:authorize="isAuthenticated()">
+                            <ul class="actions">
+                                <li><form action="#" th:action="@{/blog/blogPost/{id}(id=${blogPost.id})}" th:method="get">
+                                    <input type="submit" class="button primary small" value="Edit"/>
+                                </form></li>
+                                <li><form action="#" th:action="@{/blog/blogPost/{id}(id=${blogPost.id})}" th:method="delete">
+                                    <input type="submit" class="button small" value="Delete"/>
+                                </form></li>
+                            </ul>
+                        </div>
+
+                        <hr class="major">
+                    </section>
+                </div>
+            </div>
         </div>
-
-        <h3 th:text="${blogPost.date}"></h3>
-        <img th:if="${blogPost.image != null}" th:src="@{/image/{id}(id=${blogPost.id})}" alt="Image" src="#">
-        <p th:text="${blogPost.blog}"></p>
     </div>
 
 </body>

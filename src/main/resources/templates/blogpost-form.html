@@ -1,47 +1,85 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Create New Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
+
 <body>
-<h1>Create New Blog</h1>
 
-<form action="#" th:action="@{/blog/blogPost}" th:object="${newBlogPost}" th:method="post" enctype="multipart/form-data">
-    <!-- Add hidden form field to handle update -->
-    <input type="hidden" th:field="*{id}"/>
-    <label>
-        <input type="text" th:field="*{title}" th:placeholder="Title" th:required="required">
-    </label>
-    <br>
-    <br>
-    <label>
-        <input type="date" th:field="*{date}" th:placeholder="Date" th:required="required">
-    </label>
-    <br>
-    <br>
-    <label>
-        <input type="hidden" th:field="*{image}">
-        <div th:if="${newBlogPost.image != null}">
-            <img th:src="@{/image/{id}(id=${newBlogPost.id})}" alt="Image" src="#">
-            <input type="button" value="Delete Image" onclick="document.getElementById('delete-form').submit();" />
-            <input type="file" th:name="imageFile" style="display: none;">
-        </div>
-        <div th:if="${newBlogPost.image == null}">
-            <input type="file" th:name="imageFile">
-        </div>
-    </label>
-    <br>
-    <br>
-    <label>
-        <input type="text" th:field="*{blog}" th:placeholder="Blog" th:required="required" style="width: 150px;">
-    </label>
-    <br>
-    <br>
-    <input type="submit" value="Publish"/>
-</form>
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-<form action="#" th:action="@{/image/{id}(id=${newBlogPost.id})}" th:method="delete" style="display: none;" id="delete-form">
-</form>
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
+
+                <!-- Header -->
+                <header id="header">
+                    <a href="index.html" class="logo"><strong>Naomi's Blog</strong> by Naomi Tse</a>
+                    <ul class="icons">
+                        <li><a th:href="@{/blog/home}" class="button primary">Back to Home</a></li>
+                    </ul>
+                </header>
+
+                <!-- Content -->
+                <h1>Create/Edit Blog</h1>
+
+                <form action="#" th:action="@{/blog/blogPost}" th:object="${newBlogPost}" th:method="post" enctype="multipart/form-data">
+                    <!-- Add hidden form field to handle update -->
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="row gtr-uniform">
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" th:field="*{title}" th:placeholder="Title" th:required="required">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="date" th:field="*{date}" th:placeholder="Date" th:required="required">
+                        </div>
+                        <div class="col-12">
+                            <input type="hidden" th:field="*{image}">
+                            <div th:if="${newBlogPost.image != null}">
+                                <img class="image left" th:src="@{/image/{id}(id=${newBlogPost.id})}" alt="Image" src="#">
+                                <input type="button" value="Delete Image" class="primary" onclick="document.getElementById('delete-form').submit();" />
+                                <input type="file" th:name="imageFile" style="display: none;">
+                            </div>
+                            <div th:if="${newBlogPost.image == null}">
+                                <label class="button primary">
+                                    <input type="file" id="file-input" th:name="imageFile">
+                                    Choose File
+                                </label>
+                                <span>
+                                    <strong>Chosen file:</strong>
+                                    <span id="file-name">None</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <textarea th:field="*{blog}" th:placeholder="Blog" th:required="required" rows="18"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <input type="submit" value="Publish" class="primary"/>
+                        </div>
+                    </div>
+                </form>
+
+                <form action="#" th:action="@{/image/{id}(id=${newBlogPost.id})}" th:method="delete" style="display: none;" id="delete-form">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let inputFile = document.getElementById('file-input');
+        let fileNameField = document.getElementById('file-name');
+        inputFile.addEventListener('change', function (event) {
+            let uploadedFileName = event.target.files[0].name;
+            fileNameField.textContent = uploadedFileName;
+        });
+    </script>
+
 </body>
 </html>

@@ -1,16 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
-    <title>Spring Security Example </title>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner login">
+
+            <!-- Header -->
+            <header id="header">
+                <a href="index.html" class="logo"><strong>Naomi's Blog</strong> by Naomi Tse</a>
+                <ul class="icons">
+                    <li><a th:href="@{/blog/home}" class="button primary">Back to Home</a></li>
+                </ul>
+            </header>
+
+            <!-- Content -->
+            <section>
+                <div th:if="${param.error}">
+                    Invalid username and password.
+                </div>
+                <form th:action="@{/login}" method="post">
+                    <div><label> User Name: <input type="text" name="username"/> </label></div>
+                    <div><label> Password: <input type="password" name="password"/> </label></div>
+                    <div><input type="submit" class="primary" value="Sign In"/></div>
+                </form>
+            </section>
+
+        </div>
+    </div>
 </div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+
+
+
 </body>
 </html>
