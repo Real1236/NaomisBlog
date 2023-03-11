@@ -12,7 +12,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories(basePackages = {"${spring.data.jpa.repository.packages}"})
+@EnableJpaRepositories(basePackages = {"com.arthur.blog.dao"})
 public class DataSourceConfig {
 
     @Primary
@@ -29,11 +29,5 @@ public class DataSourceConfig {
         return builder
                 .dataSource(appDataSource)
                 .build();
-    }
-
-    @Bean
-    @ConfigurationProperties(prefix = "security.datasource")
-    public DataSource securityDataSource() {
-        return DataSourceBuilder.create().build();
     }
 }
