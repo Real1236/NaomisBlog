@@ -16,12 +16,12 @@ This is a Spring Boot application built with Spring Security, Spring MVC, MySQL,
 ## Features
 * **Login:** Users can log in/out.
 * **Create, Read, Update, Delete Posts:** Logged-in users can create new posts, view existing posts, edit posts they have created, and delete posts they have created.
-* **Role-based Access Control:** Users with the BLOGGER authority can create, read, update, and delete all posts, while users with the READER authority can only create, read, update, and delete their own posts.
+* **Role-based Access Control:** Users with the BLOGGER authority can create, read, update, and delete all posts, while users with the READER authority can only view posts.
 
 ## Architecture
 The application is built using the Spring MVC architecture with the following components:
 
-* **Model:** This component contains the classes that represent the data of the application. It includes entities for the blog posts and user details, as well as DTOs for transferring data between the layers of the application.
+* **Model:** This component contains the classes that represent the data of the application. It includes entities for the blog posts and user details.
 * **View:** This component contains the Thymeleaf templates that render the HTML pages for the user interface.
 * **Controller:** This component contains the classes that handle HTTP requests and responses. It interacts with the service layer to retrieve data and returns the appropriate view to the user.
 
@@ -37,3 +37,6 @@ In addition, the application has the following layers:
 * MySQL
 * Thymeleaf
 * Maven
+
+## Credits
+The HTML and CSS template used in this project was obtained from html5up.net.
