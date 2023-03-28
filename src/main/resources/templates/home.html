@@ -28,6 +28,7 @@
 
                         <div sec:authorize="hasAnyAuthority('BLOGGER')">
                             <li><a th:href="@{/blog/blogPost}" class="button primary">Create New Blog</a></li>
+                            <li><a th:href="@{/blog/generate}" class="button primary">Generate Blog</a></li>
                             <li><a th:href="@{/logout}" class="button">Log Out</a></li>
                         </div>
 
