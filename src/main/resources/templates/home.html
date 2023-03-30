@@ -50,9 +50,18 @@
                                 <img class="image right" th:if="${blogPost.image != null}" th:src="@{/image/{id}(id=${blogPost.id})}" alt="Image" src="#">
                                 <p th:text="${blogPost.blog}" style="white-space: pre-wrap;"></p>
                             </div>
+                            <div class="col-6 col-12-small">
+                                <ul class="actions">
+                                    <li><h4>12 people like this</h4></li>
+                                    <div sec:authorize="hasAnyAuthority('READER')">
+                                        <li><form action="#" th:action="@{/blog/blogPost/{id}(id=${blogPost.id})}" th:method="get">
+                                            <input type="submit" class="button small" value="Like"/>
+                                        </form></li>
+                                    </div>
+                                </ul>
+                            </div>
                         </div>
 
-<!--                        <div sec:authorize="isAuthenticated()">-->
                         <div sec:authorize="hasAnyAuthority('BLOGGER')">
                             <ul class="actions">
                                 <li><form action="#" th:action="@{/blog/blogPost/{id}(id=${blogPost.id})}" th:method="get">
