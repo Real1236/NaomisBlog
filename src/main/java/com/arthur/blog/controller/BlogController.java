@@ -98,7 +98,16 @@ public class BlogController {
     public String likePost(@PathVariable(name = "id") int blogPostId, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         UserEntity currentUser = userService.getUserByUsername(userDetails.getUsername());
-        likeService.addLike(currentUser.getId(), blogPostId);
+        Optional<BlogPost> blogPost = blogPostService.findById(blogPostId);
+        if (blogPost.isPresent()) {
+            if (blogPost.get().getLikes().contains(currentUser)) {
+                likeService.removeLike(currentUser.getId(), blogPostId);
+            } else {
+                likeService.addLike(currentUser.getId(), blogPostId);
+            }
+        } else {
+            throw new RuntimeException("Blog post does not exist");
+        }
         return "redirect:/blog/home";
     }
 

@@ -18,4 +18,9 @@ public class LikeServiceImpl implements LikeService {
     public void addLike(int userId, int blogPostId) {
         likeRepository.addLike(userId, blogPostId);
     }
+
+    @Override
+    public void removeLike(Integer userId, Integer blogPostId) {
+        likeRepository.removeLike(userId, blogPostId);
+    }
 }
