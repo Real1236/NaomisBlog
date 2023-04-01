@@ -54,7 +54,7 @@
                                 <ul class="actions">
                                     <li><h4>12 people like this</h4></li>
                                     <div sec:authorize="hasAnyAuthority('READER')">
-                                        <li><form action="#" th:action="@{/blog/blogPost/{id}(id=${blogPost.id})}" th:method="get">
+                                        <li><form action="#" th:action="@{/blog/like/{id}(id=${blogPost.id})}" th:method="post">
                                             <input type="submit" class="button small" value="Like"/>
                                         </form></li>
                                     </div>

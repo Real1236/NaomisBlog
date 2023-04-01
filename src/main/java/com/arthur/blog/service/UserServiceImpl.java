@@ -42,4 +42,9 @@ public class UserServiceImpl implements UserService {
     private void encodePassword(UserDTO source, UserEntity target){
         target.setPassword(passwordEncoder.encode(source.getPassword()));
     }
+
+    @Override
+    public UserEntity getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }
