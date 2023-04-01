@@ -1,8 +1,9 @@
-package com.arthur.blog.service;
+package com.arthur.blog.service.impl;
 
 import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPost;
 import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostInput;
 import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostOutput;
+import com.arthur.blog.service.GeneratedBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

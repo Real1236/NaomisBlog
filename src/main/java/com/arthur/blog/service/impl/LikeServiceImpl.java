@@ -1,6 +1,7 @@
-package com.arthur.blog.service;
+package com.arthur.blog.service.impl;
 
 import com.arthur.blog.dao.LikeRepository;
+import com.arthur.blog.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

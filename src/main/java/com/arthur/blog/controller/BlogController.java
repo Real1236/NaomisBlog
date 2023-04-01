@@ -6,6 +6,7 @@ import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostInput;
 import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostOutput;
 import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostRequestBody;
 import com.arthur.blog.service.*;
+import com.arthur.blog.service.impl.GeneratedBlogServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
