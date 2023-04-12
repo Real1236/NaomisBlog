@@ -1,7 +1,11 @@
 package com.arthur.blog.controller;
 
 import com.arthur.blog.entity.BlogPost;
+import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostInput;
+import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostOutput;
+import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostRequestBody;
 import com.arthur.blog.service.BlogPostService;
+import com.arthur.blog.service.GeneratedBlogServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +20,12 @@ import java.util.Optional;
 public class BlogController {
 
     BlogPostService blogPostService;
+    GeneratedBlogServiceImpl generatedBlogService;
 
     @Autowired
-    public BlogController(BlogPostService blogPostService) {
+    public BlogController(BlogPostService blogPostService, GeneratedBlogServiceImpl generatedBlogService) {
         this.blogPostService = blogPostService;
+        this.generatedBlogService = generatedBlogService;
     }
 
     @GetMapping("/home")
@@ -61,6 +67,22 @@ public class BlogController {
     public String deleteBlogPost(@PathVariable("id") int id) {
         blogPostService.deleteById(id);
         return "redirect:/blog/home";
+    }
+
+    @GetMapping("/generate")
+    public String generateBlogPostForm(Model model) {
+        model.addAttribute("generatedBlogPostBody", new GeneratedBlogPostRequestBody());
+        model.addAttribute("generatedBlogPost", null);
+        return "/generate-blog-form";
+    }
+
+    @PostMapping("/generate")
+    public String generateBlogPost(Model model, @ModelAttribute("generatedBlogPostBody") GeneratedBlogPostRequestBody input) {
+        GeneratedBlogPostOutput output = generatedBlogService.generateBlogPost(
+                new GeneratedBlogPostInput(input.getContext(), input.getKeywordsArray(), input.getTitle()));
+        model.addAttribute("generatedBlogPostBody", input);
+        model.addAttribute("generatedBlogPost", output);
+        return "/generate-blog-form";
     }
 
 }

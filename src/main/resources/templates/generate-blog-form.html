@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
+
+                <!-- Header -->
+                <header id="header">
+                    <a href="index.html" class="logo"><strong>Naomi's Blog</strong> by Naomi Tse</a>
+                    <ul class="icons">
+                        <li><a th:href="@{/blog/home}" class="button primary">Back to Home</a></li>
+                    </ul>
+                </header>
+
+                <!-- Content -->
+                <h1>Create/Edit Blog</h1>
+
+                <form action="#" th:action="@{/blog/generate}" th:object="${generatedBlogPostBody}" th:method="post">
+                    <div class="row gtr-uniform">
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" th:field="*{context}" th:placeholder="Context" th:required="required">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" th:field="*{keywords}" th:placeholder="Keywords" th:required="required">
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <input type="text" th:field="*{title}" th:placeholder="Title" th:required="required">
+                        </div>
+                        <div class="col-12">
+                            <input type="submit" value="Generate" class="primary"/>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row gtr-uniform" th:if="${generatedBlogPost != null}">
+                    <div class="col-12">
+                        <textarea th:text="${generatedBlogPost.text}"rows="18"></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
