@@ -14,7 +14,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`username`, `password`)
 VALUES ('john', '$2a$12$hMnUTRibdnV8So01.i8JM.kBpXGYF3i1pKCQLxadZmCzke5fvqNne'),
-('susan', '$2a$12$hMnUTRibdnV8So01.i8JM.kBpXGYF3i1pKCQLxadZmCzke5fvqNne');	-- password: password123
+('susan', '$2a$12$hMnUTRibdnV8So01.i8JM.kBpXGYF3i1pKCQLxadZmCzke5fvqNne'),	-- password: password123
+('bob', '$2a$12$hMnUTRibdnV8So01.i8JM.kBpXGYF3i1pKCQLxadZmCzke5fvqNne'),	-- password: password123
+('joe', '$2a$12$hMnUTRibdnV8So01.i8JM.kBpXGYF3i1pKCQLxadZmCzke5fvqNne');	-- password: password123
 
 CREATE TABLE `ad_groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -36,5 +38,5 @@ CREATE TABLE `user_groups` (
 ) ENGINE=InnoDB;
 
 INSERT INTO `user_groups` (`user_id`, `group_id`) 
-VALUES (1, 1), (2, 2);
+VALUES (1, 1), (2, 2), (3, 2), (4, 2);
 

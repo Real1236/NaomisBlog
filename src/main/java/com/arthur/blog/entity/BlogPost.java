@@ -3,8 +3,7 @@ package com.arthur.blog.entity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
-import java.util.Arrays;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "blog-posts")
@@ -87,6 +86,14 @@ public class BlogPost {
 
     public int getNumOfLikes() {
         return this.likes.size();
+    }
+
+    public List<Integer> getLikedUserIds() {
+        List<Integer> likedUserIds = new ArrayList<>();
+        for (UserEntity user : this.likes) {
+            likedUserIds.add(user.getId());
+        }
+        return likedUserIds;
     }
 
     @Override

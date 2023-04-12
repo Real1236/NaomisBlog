@@ -7,5 +7,5 @@ public interface UserService {
 
     void register(final UserDTO user);
 
-    UserEntity getUserByUsername(String username);
+    UserEntity findById(int id);
 }

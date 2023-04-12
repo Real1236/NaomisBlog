@@ -5,11 +5,14 @@ import com.arthur.blog.entity.UserEntity;
 import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostInput;
 import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostOutput;
 import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostRequestBody;
-import com.arthur.blog.service.*;
+import com.arthur.blog.security.CustomUserDetails;
+import com.arthur.blog.service.BlogPostService;
+import com.arthur.blog.service.GeneratedBlogService;
+import com.arthur.blog.service.LikeService;
+import com.arthur.blog.service.UserService;
 import com.arthur.blog.service.impl.GeneratedBlogServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -97,8 +100,8 @@ public class BlogController {
 
     @PostMapping("/like/{id}")
     public String likePost(@PathVariable(name = "id") int blogPostId, Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        UserEntity currentUser = userService.getUserByUsername(userDetails.getUsername());
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        UserEntity currentUser = userService.findById(userDetails.getId());
         Optional<BlogPost> blogPost = blogPostService.findById(blogPostId);
         if (blogPost.isPresent()) {
             if (blogPost.get().getLikes().contains(currentUser)) {
