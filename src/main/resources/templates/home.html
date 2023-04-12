@@ -62,8 +62,8 @@
                                     <div sec:authorize="hasAnyAuthority('READER')">
                                         <li>
                                             <form th:action="@{/blog/like/{id}(id=${blogPost.id})}" th:method="post">
-                                                <input type="submit" class="button small" value="Like" th:unless="${#lists.contains(blogPost.getLikedUserIds, #authentication.principal.id)}"/>
-                                                <input type="submit" class="button primary small" value="Unlike" th:if="${#lists.contains(blogPost.getLikedUserIds, #authentication.principal.id)}"/>
+                                                <input type="submit" class="button small" value="Like" th:unless="${#sets.contains(blogPost.getLikedUserIds, #authentication.principal.id)}"/>
+                                                <input type="submit" class="button primary small" value="Unlike" th:if="${#sets.contains(blogPost.getLikedUserIds, #authentication.principal.id)}"/>
                                             </form>
                                         </li>
                                     </div>

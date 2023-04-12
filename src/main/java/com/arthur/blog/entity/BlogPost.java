@@ -88,8 +88,16 @@ public class BlogPost {
         return this.likes.size();
     }
 
-    public List<Integer> getLikedUserIds() {
-        List<Integer> likedUserIds = new ArrayList<>();
+//    public List<Integer> getLikedUserIds() {
+//        List<Integer> likedUserIds = new ArrayList<>();
+//        for (UserEntity user : this.likes) {
+//            likedUserIds.add(user.getId());
+//        }
+//        return likedUserIds;
+//    }
+
+    public Set<Integer> getLikedUserIds() {
+        Set<Integer> likedUserIds = new HashSet<>();
         for (UserEntity user : this.likes) {
             likedUserIds.add(user.getId());
         }
