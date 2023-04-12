@@ -1,5 +1,7 @@
 package com.arthur.blog.config;
 
+import com.arthur.blog.security.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +15,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final CustomUserDetailsService customUserDetailsService;
+
+    @Autowired
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
+        this.customUserDetailsService = customUserDetailsService;
+    }
+
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -22,6 +31,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // To secure website
         http
+            .userDetailsService(customUserDetailsService)
             .authorizeHttpRequests((requests) -> requests
                     .requestMatchers("/", "/blog/home", "/image/**", "/css/**").permitAll()
                     .anyRequest().authenticated()

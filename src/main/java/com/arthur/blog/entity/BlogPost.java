@@ -3,7 +3,7 @@ package com.arthur.blog.entity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
-import java.util.Arrays;
+import java.util.*;
 
 @Entity
 @Table(name = "blog-posts")
@@ -26,6 +26,12 @@ public class BlogPost {
 
     @Column(name = "blog")
     private String blog;
+
+    @ManyToMany
+    @JoinTable(name = "likes",
+                joinColumns = @JoinColumn(name = "blogpost_id"),
+                inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<UserEntity> likes;
 
     public BlogPost() {
     }
@@ -68,6 +74,34 @@ public class BlogPost {
 
     public void setBlog(String blog) {
         this.blog = blog;
+    }
+
+    public Set<UserEntity> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Set<UserEntity> likes) {
+        this.likes = likes;
+    }
+
+    public int getNumOfLikes() {
+        return this.likes.size();
+    }
+
+//    public List<Integer> getLikedUserIds() {
+//        List<Integer> likedUserIds = new ArrayList<>();
+//        for (UserEntity user : this.likes) {
+//            likedUserIds.add(user.getId());
+//        }
+//        return likedUserIds;
+//    }
+
+    public Set<Integer> getLikedUserIds() {
+        Set<Integer> likedUserIds = new HashSet<>();
+        for (UserEntity user : this.likes) {
+            likedUserIds.add(user.getId());
+        }
+        return likedUserIds;
     }
 
     @Override

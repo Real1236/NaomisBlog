@@ -1,12 +1,18 @@
 package com.arthur.blog.controller;
 
 import com.arthur.blog.entity.BlogPost;
+import com.arthur.blog.entity.UserEntity;
 import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostInput;
 import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostOutput;
 import com.arthur.blog.entity.generatedBlogPost.GeneratedBlogPostRequestBody;
+import com.arthur.blog.security.CustomUserDetails;
 import com.arthur.blog.service.BlogPostService;
-import com.arthur.blog.service.GeneratedBlogServiceImpl;
+import com.arthur.blog.service.GeneratedBlogService;
+import com.arthur.blog.service.LikeService;
+import com.arthur.blog.service.UserService;
+import com.arthur.blog.service.impl.GeneratedBlogServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +26,19 @@ import java.util.Optional;
 public class BlogController {
 
     BlogPostService blogPostService;
-    GeneratedBlogServiceImpl generatedBlogService;
+    GeneratedBlogService generatedBlogService;
+    LikeService likeService;
+    UserService userService;
 
     @Autowired
-    public BlogController(BlogPostService blogPostService, GeneratedBlogServiceImpl generatedBlogService) {
+    public BlogController(BlogPostService blogPostService,
+                          GeneratedBlogServiceImpl generatedBlogService,
+                          LikeService likeService,
+                          UserService userService) {
         this.blogPostService = blogPostService;
         this.generatedBlogService = generatedBlogService;
+        this.likeService = likeService;
+        this.userService = userService;
     }
 
     @GetMapping("/home")
@@ -83,6 +96,23 @@ public class BlogController {
         model.addAttribute("generatedBlogPostBody", input);
         model.addAttribute("generatedBlogPost", output);
         return "/generate-blog-form";
+    }
+
+    @PostMapping("/like/{id}")
+    public String likePost(@PathVariable(name = "id") int blogPostId, Authentication authentication) {
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        UserEntity currentUser = userService.findById(userDetails.getId());
+        Optional<BlogPost> blogPost = blogPostService.findById(blogPostId);
+        if (blogPost.isPresent()) {
+            if (blogPost.get().getLikes().contains(currentUser)) {
+                likeService.removeLike(currentUser.getId(), blogPostId);
+            } else {
+                likeService.addLike(currentUser.getId(), blogPostId);
+            }
+        } else {
+            throw new RuntimeException("Blog post does not exist");
+        }
+        return "redirect:/blog/home";
     }
 
 }
