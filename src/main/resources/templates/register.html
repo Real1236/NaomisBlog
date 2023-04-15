@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner login">
+
+            <!-- Header -->
+            <header id="header">
+                <a href="index.html" class="logo"><strong>Naomi's Blog</strong> by Naomi Tse</a>
+                <ul class="icons">
+                    <li><a th:href="@{/blog/home}" class="button primary">Back to Home</a></li>
+                </ul>
+            </header>
+
+            <!-- Content -->
+            <section>
+                <form action="#" th:action="@{/register}" th:object="${newUser}" th:method="post">
+                    <div><label> User Name: <input type="text" name="username"/> </label></div>
+                    <div><label> Password: <input type="password" name="password"/> </label></div>
+                    <div><input type="submit" class="primary" value="Sign Up"/></div>
+                </form>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

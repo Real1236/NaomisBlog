@@ -21,15 +21,16 @@ public class UserServiceImpl implements UserService {
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, GroupRepository groupRepository) {
+    public UserServiceImpl(UserRepository userRepository, GroupRepository groupRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.groupRepository = groupRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void register(UserDTO userData) {
         UserEntity newUserEntity = new UserEntity();
-        BeanUtils.copyProperties(newUserEntity, userData);
+        BeanUtils.copyProperties(userData, newUserEntity);
         encodePassword(userData, newUserEntity);
         updateReaderGroup(newUserEntity);
         userRepository.save(newUserEntity);

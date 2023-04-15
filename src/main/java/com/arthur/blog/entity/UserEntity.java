@@ -29,17 +29,10 @@ public class UserEntity {
 
     public void addUserGroups(Group group){
         userGroups.add(group);
-        group.getUsers().add(this);
+        group.addUser(this);
     }
 
     public UserEntity() {
-    }
-
-    public UserEntity(int id, String username, String password, Set<Group> userGroups) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.userGroups = userGroups;
     }
 
     public int getId() {
@@ -70,7 +63,4 @@ public class UserEntity {
         return userGroups;
     }
 
-    public void setUserGroups(Set<Group> userGroups) {
-        this.userGroups = userGroups;
-    }
 }

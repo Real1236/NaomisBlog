@@ -33,7 +33,7 @@ public class SecurityConfig {
         http
             .userDetailsService(customUserDetailsService)
             .authorizeHttpRequests((requests) -> requests
-                    .requestMatchers("/", "/blog/home", "/image/**", "/css/**").permitAll()
+                    .requestMatchers("/", "/blog/home", "/image/**", "/css/**", "/register").permitAll()
                     .anyRequest().authenticated()
             )
             .formLogin((form) -> form

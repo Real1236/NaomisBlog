@@ -21,14 +21,11 @@ public class Group {
     @ManyToMany(mappedBy = "userGroups")
     private Set<UserEntity> userEntities;
 
-    public Group() {
+    public void addUser(UserEntity user){
+        userEntities.add(user);
     }
 
-    public Group(int id, String code, String name, Set<UserEntity> userEntities) {
-        this.id = id;
-        this.code = code;
-        this.name = name;
-        this.userEntities = userEntities;
+    public Group() {
     }
 
     public int getId() {
@@ -55,11 +52,4 @@ public class Group {
         this.name = name;
     }
 
-    public Set<UserEntity> getUsers() {
-        return userEntities;
-    }
-
-    public void setUsers(Set<UserEntity> userEntities) {
-        this.userEntities = userEntities;
-    }
 }

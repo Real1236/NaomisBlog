@@ -24,6 +24,7 @@
                     <ul class="icons">
                         <div sec:authorize="isAnonymous()">
                             <li><a th:href="@{/login}" class="button primary">Login</a></li>
+                            <li><a th:href="@{/register}" class="button primary">Sign Up</a></li>
                         </div>
 
                         <div sec:authorize="hasAnyAuthority('BLOGGER')">

@@ -80,21 +80,9 @@ public class BlogPost {
         return likes;
     }
 
-    public void setLikes(Set<UserEntity> likes) {
-        this.likes = likes;
-    }
-
     public int getNumOfLikes() {
         return this.likes.size();
     }
-
-//    public List<Integer> getLikedUserIds() {
-//        List<Integer> likedUserIds = new ArrayList<>();
-//        for (UserEntity user : this.likes) {
-//            likedUserIds.add(user.getId());
-//        }
-//        return likedUserIds;
-//    }
 
     public Set<Integer> getLikedUserIds() {
         Set<Integer> likedUserIds = new HashSet<>();
