@@ -33,6 +33,6 @@ public class LoginController {
     @PostMapping("/register")
     public String register(@ModelAttribute("newUser") UserDTO newUser) {
         userService.register(newUser);
-        return "register";
+        return "redirect:/blog/home";
     }
 }
