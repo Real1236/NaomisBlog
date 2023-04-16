@@ -2,20 +2,23 @@
 This is a Spring Boot application built with Spring Security, Spring MVC, MySQL, and Thymeleaf. The application allows users to create, read, update, and delete blog posts, as well as log in/out.
 
 ## Prerequisites
-* Java 17 or higher
+* Java 17
 * Maven
 * MySQL
 
 ## Getting Started
 1. Clone the repository to your local machine.
-2. Open the application.properties file and configure the MySQL database settings according to your environment.
-4. Run the 'BlogApplication.java'
-5. Open a web browser and navigate to http://localhost:8080 to access the application.
-6. Log in as a BLOGGER using 'john' and 'password123' or as a READER using 'susan' and 'password123'
+2. (Optional) drag the images in the 'sql-scripts' folder into your MySQL program data folder (typically in 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads')
+3. Within MySQL Workbench, run the 'MySQL_User.sql', 'blog-posts.sql', 'users.sql', and 'likes.sql' scripts in the 'sql-scripts' folder, in that order
+4. Open the application.properties file and configure the MySQL database settings according to your environment.
+5. Run the 'BlogApplication.java' file
+6. Open a web browser and navigate to http://localhost:8080/blog/home to access the application.
+7. Log in as a BLOGGER using 'john' and 'password123' or as a READER using 'susan' and 'password123'
 
 ## Features
 * **Login:** Users can log in/out.
 * **Create, Read, Update, Delete Posts:** Logged-in users can create new posts, view existing posts, edit posts they have created, and delete posts they have created.
+* **Like Posts:** Users can establish relationships between themselves and posts to keep track of each blog post's likes
 * **Role-based Access Control:** Users with the BLOGGER authority can create, read, update, and delete all posts, while users with the READER authority can only view posts.
 
 ## Architecture

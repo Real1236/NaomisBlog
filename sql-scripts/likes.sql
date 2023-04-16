@@ -11,4 +11,4 @@ CREATE TABLE `likes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `likes` (`user_id`, `blogpost_id`) 
-VALUES (2, 15);
+VALUES (2, 1);
