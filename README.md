@@ -20,6 +20,7 @@ This is a Spring Boot application built with Spring Security, Spring MVC, MySQL,
 * **Create, Read, Update, Delete Posts:** Logged-in users can create new posts, view existing posts, edit posts they have created, and delete posts they have created.
 * **Like Posts:** Users can establish relationships between themselves and posts to keep track of each blog post's likes
 * **Role-based Access Control:** Users with the BLOGGER authority can create, read, update, and delete all posts, while users with the READER authority can only view posts.
+* **TextCortex API::** Integration with TextCortex's 'Generate' API allows users to generate original blog posts based on their custom input.
 
 ## Architecture
 The application is built using the Spring MVC architecture with the following components:
