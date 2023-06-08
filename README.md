@@ -1,3 +1,5 @@
+![image](https://github.com/Real1236/NaomisBlog/assets/58100386/b6bc8a8f-d870-4340-99af-2d794cb4be58)
+
 # Blog Application
 This is a Spring Boot application built with Spring Security, Spring MVC, MySQL, and Thymeleaf. The application allows users to create, read, update, and delete blog posts, as well as log in/out.
 
@@ -21,6 +23,7 @@ This is a Spring Boot application built with Spring Security, Spring MVC, MySQL,
 * **Like Posts:** Users can establish relationships between themselves and posts to keep track of each blog post's likes
 * **Role-based Access Control:** Users with the BLOGGER authority can create, read, update, and delete all posts, while users with the READER authority can only view posts.
 * **TextCortex API::** Integration with TextCortex's 'Generate' API allows users to generate original blog posts based on their custom input.
+![image](https://github.com/Real1236/NaomisBlog/assets/58100386/d4a14909-746a-423a-94ee-9bbb2ca849f2)
 
 ## Architecture
 The application is built using the Spring MVC architecture with the following components:
